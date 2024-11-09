@@ -30,3 +30,8 @@ mykernel.iso: mykernel.bin
 	echo '}' >> iso/boot/grub/grub.cfg
 	grub-mkrescue --output=$@ iso
 	rm -rf iso
+run: mykernel.iso
+        rm -rf my_os_image.qcow2
+        qemu-img create -f qcow2 my_os_image.qcow2 2G
+        qemu-system-x86_64 -m 512 -cdrom $< -hda my_os_image.qcow2 -boot d
+
