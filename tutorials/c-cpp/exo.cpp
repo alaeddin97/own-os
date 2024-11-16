@@ -64,6 +64,14 @@ int main(int argc, char *argv[]) {
     cout<<endl<<endl;
     order();
 
+    char p1 = 'c';
+    char p2[] = {'a'};
+    cout<<"address p1: "<<&p1<<endl;
+    cout<<"address p2: "<<&p2<<endl;
+    cout<<"address p1 as pointer: "<<(char*)&p1<<endl;
+    cout<<"address p2 as pointer: "<<(char*)&p2<<endl;
+    cout<<"Substract pointers "<<(char*)p2 - (char*)&p1<<endl;
+
 
     return 0;
 }

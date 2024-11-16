@@ -3,7 +3,7 @@ GPPPARMS = -m32 -fno-use-cxa-atexit  -nostdlib -fno-builtin -fno-rtti -fno-excep
 ASPARAMS = --32
 LDPARAMS = -melf_i386
 
-objects = loader.o kernel.o
+objects = loader.o gdt.o kernel.o
 
 %.o: %.cpp
 	g++ $(GPPPARMS) -o $@ -c $<
@@ -31,7 +31,7 @@ mykernel.iso: mykernel.bin
 	grub-mkrescue --output=$@ iso
 	rm -rf iso
 run: mykernel.iso
-        rm -rf my_os_image.qcow2
-        qemu-img create -f qcow2 my_os_image.qcow2 2G
-        qemu-system-x86_64 -m 512 -cdrom $< -hda my_os_image.qcow2 -boot d
+	rm -rf my_os_image.qcow2
+	qemu-img create -f qcow2 my_os_image.qcow2 2G
+	qemu-system-x86_64 -m 512 -cdrom $< -hda my_os_image.qcow2 -boot d
 
